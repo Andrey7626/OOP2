@@ -212,7 +212,7 @@ public class RadioTest {
     @Test
     public void setIncreaseAboveMaxVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(105);
+        radio.setCurrentVolume(199);
         radio.increaseVolume();
         int expected = 100;
         int actual = radio.getCurrentVolume();
