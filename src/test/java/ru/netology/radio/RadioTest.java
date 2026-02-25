@@ -238,5 +238,63 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void withoutParameters() {
+        Radio radio = new Radio();
+        Assertions.assertEquals(10, radio.getStationsCount());
+        Assertions.assertEquals(9, radio.maxStation);
+    }
+
+    @Test
+    public void withParameters() {
+        Radio radio = new Radio(20);
+        Assertions.assertEquals(20, radio.getStationsCount());
+        Assertions.assertEquals(19, radio.maxStation);
+    }
+
+    @Test
+    public void negativeNumberStations() {
+        Radio radio = new Radio(-3);
+        Assertions.assertEquals(10, radio.getStationsCount());
+        Assertions.assertEquals(9, radio.maxStation);
+    }
+
+    @Test
+    public void setStation() {
+        Radio radio = new Radio(10);
+        radio.setCurrentStation(3);
+        Assertions.assertEquals(3, radio.getCurrentStation());
+    }
+
+    @Test
+    public void setStationBelowZero() {
+        Radio radio = new Radio(9);
+        radio.setCurrentStation(-1);
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void setStationAboveMax() {
+        Radio radio = new Radio(8);
+        radio.setCurrentStation(10);
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void nextStation() {
+        Radio radio = new Radio(5);
+        radio.setCurrentStation(4);
+        radio.next();
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void prevStation() {
+        Radio radio = new Radio(8);
+        radio.setCurrentStation(0);
+        radio.prev();
+        Assertions.assertEquals(7, radio.getCurrentStation());
+    }
 }
 
